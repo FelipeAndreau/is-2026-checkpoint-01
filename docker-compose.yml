@@ -1,0 +1,65 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "${FRONTEND_PORT}:8080"
+    networks:
+      - teamboard-net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 128M
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  backend:
+    build: ./backend
+    ports:
+      - "${BACKEND_PORT}:5000"
+    env_file: .env
+    networks:
+      - teamboard-net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:5000/api/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    image: postgres:16-alpine
+    env_file: .env
+    # Volumen nombrado para persistir datos
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - teamboard-net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    # Healthcheck usando pg_isready para verificar que la BD esté lista
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  teamboard-net:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  portainer_data:
