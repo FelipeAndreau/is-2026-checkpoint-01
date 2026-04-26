@@ -75,7 +75,7 @@ Portainer es una interfaz web para administrar y monitorear contenedores Docker 
    http://localhost:9000
 
 3. En el primer acceso, crear un usuario administrador con contraseña.
-   ![Crear usuario admin](portainer/img/portainer-login.png)
+   ![Crear usuario admin](portainer/img/portainer-login.jpeg)
 
 4. Seleccionar el entorno **local** para ver los contenedores.
 
@@ -83,11 +83,11 @@ Portainer es una interfaz web para administrar y monitorear contenedores Docker 
 
 #### Dashboard - Resumen del entorno
 
-![Dashboard](portainer/img/portainer-dashboard.png)
+![Dashboard](portainer/img/portainer-dashboard.jpeg)
 
 #### Stack con los contenedores corriendo
 
-![Stack](portainer/img/portainer-stack.png)
+![Stack](portainer/img/portainer-stack.jpeg)
 
 ### Servicios disponibles
 
@@ -100,8 +100,8 @@ Portainer es una interfaz web para administrar y monitorear contenedores Docker 
 
 #### Frontend - TeamBoard
 
-![Frontend](portainer/img/portainer-frontend.png)
+![Frontend](portainer/img/portainer-frontend.jpeg)
 
 #### Backend - API REST
 
-![API](portainer/img/portainer-api.png)
+![API](portainer/img/portainer-api.jpeg)
