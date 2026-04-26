@@ -56,15 +56,21 @@ services:
       timeout: 5s
       retries: 5
 
-portainer:
-  image: portainer/portainer-ce:latest
-  ports:
-    - "${PORTAINER_PORT}:9000"
-  volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-    - portainer_data:/var/data
-  networks:
-    - teamboard-net
+  portainer:
+    image: portainer/portainer-ce:latest
+    ports:
+      - "${PORTAINER_PORT}:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - teamboard-net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 128M
+
 
 networks:
   teamboard-net:
